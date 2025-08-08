@@ -1,15 +1,15 @@
-
-     <!DOCTYPE html>
-<html >
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Maybelline PWA</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maybelline - ZaqApp</title>
+    <link rel="stylesheet" href="./style.css">
     <link rel="apple-touch-icon" href="images/icons/android-chrome-192x192.png" />
 
-    <link rel="manifest" href="manifest.json" />
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" href="./images/icons/favicon.ico">
 </head>
 
 <body>
@@ -18,27 +18,53 @@
         <p>Your daily dose of glam powered by Maybelline</p>
     </header>
 
+    <!-- Offline Message -->
+    <div id="connectionStatus" class="offline-message" style="display: none;">
+        <p>الانترنت فصل وكده🐦‍⬛</p>
+    </div>
+
     <main>
-        <section class="card">
-            <img src="images/lipstick.jpeg" alt="Lipstick" />
-            <h2>Lipstick</h2>
-            <p>Bold and beautiful colors for every mood.</p>
+        <section class="posts-section">
+            <h2>Latest Posts</h2>
+            <select id="postSelect" title="jj">
+                <option value="">Select a post</option>
+            </select>
+            <div id="postDescription"></div>
         </section>
 
-        <section class="card">
-            <img src="images/foundation.jpeg" alt="Foundation" />
-            <h2>Foundation</h2>
-            <p>Flawless skin? Yes please!</p>
-        </section>
-
-        <section class="card">
-            <img src="images/mascara.jpeg" alt="Mascara" />
-            <h2>Mascara</h2>
-            <p>Volume that speaks louder than words.</p>
+        <section class="cards-section">
+            <div class="card">
+                <img src="images/lipstick.jpeg" alt="Lipstick">
+                <h3>Lipstick</h3>
+                <p>Bold and beautiful colors for every mood.</p>
+            </div>
+            <div class="card">
+                <img src="images/foundation.jpeg" alt="Foundation">
+                <h3>Foundation</h3>
+                <p>Flawless skin? Yes please!</p>
+            </div>
+            <div class="card">
+                <img src="images/mascara.jpeg" alt="Mascara">
+                <h3>Mascara</h3>
+                <p>Volume that speaks louder than words.</p>
+            </div>
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    })
+                    .catch(error => {
+                        console.error('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 
 </html>
